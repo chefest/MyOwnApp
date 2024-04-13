@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "MyOwnApp"
 include(":app")
+include(":auth")
+include(":common")
