@@ -20,14 +20,10 @@ fun InputText(
     isPassword: Boolean = false,
     onValueChange: OnValueChange = {}
 ) {
-    var text by remember {
-        mutableStateOf(value)
-    }
     OutlinedTextField(
         modifier = modifier,
-        value = text,
+        value = value,
         onValueChange = {
-            text = it
             onValueChange.invoke(it)
         },
         label = {
