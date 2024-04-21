@@ -1,10 +1,14 @@
 package com.chefsito.myownapp.auth.domain
 
+import com.chefsito.myownapp.common.core.DomainException
+import javax.inject.Inject
+
 /**
  * This class hanlde all bussiness rules about
  * the login process
  */
-class AuthUseCase {
+class AuthUseCase @Inject constructor(
+) {
     fun exec(
         username: String,
         password: String
