@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chefsito.myownapp.auth.domain.exceptions.AuthDomainException
 import com.chefsito.myownapp.auth.domain.usecases.AuthUseCase
+import com.chefsito.myownapp.common.core.ScreenStates
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthScreenViewModel @Inject constructor(
-    val authUseCase: AuthUseCase
+    private val authUseCase: AuthUseCase
 ) : ViewModel() {
 
     /**
@@ -50,11 +51,13 @@ class AuthScreenViewModel @Inject constructor(
     private fun login() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val data = authUseCase.exec(
+                authUseCase.exec(
                     username = _state.value.username,
                     password = _state.value.password
                 )
-                data.toString()
+                _state.update {
+                    it.copy(screenStates = ScreenStates.SUCCESS)
+                }
             } catch (ex: AuthDomainException) {
                 _state.update {
                     it.copy(errorMessage = ex.message ?: "")
