@@ -62,6 +62,8 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(project(":auth"))
+    implementation(project(":dashboard"))
+    implementation(project(":common"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,4 +75,9 @@ dependencies {
     //HILT
     implementation(libs.hilt)
     kapt(libs.hiltCompiler)
+
+    //NAVIGATION
+    implementation(libs.navigationUI)
+    implementation(libs.navigationCompose)
+    implementation(libs.hiltNavigation)
 }
