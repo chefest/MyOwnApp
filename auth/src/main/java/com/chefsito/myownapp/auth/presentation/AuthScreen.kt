@@ -8,12 +8,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.chefsito.myownapp.common.components.InputText
 import com.chefsito.myownapp.common.components.Separator
 import com.chefsito.myownapp.common.components.SubmitButton
 import com.chefsito.myownapp.auth.R
+import com.chefsito.myownapp.common.components.Label
 import com.chefsito.myownapp.common.components.OnClickSubmit
 import com.chefsito.myownapp.common.components.OnValueChange
 
@@ -46,6 +48,11 @@ fun AuthScreen(
             label = stringResource(id = R.string.password),
             onValueChange = onPasswordChanged,
             isPassword = true
+        )
+        Separator(value = 10.dp)
+        Label(
+            value = state.errorMessage,
+            color = Color.Red
         )
         Separator(value = 10.dp)
         SubmitButton(
