@@ -23,3 +23,4 @@ rootProject.name = "MyOwnApp"
 include(":app")
 include(":auth")
 include(":common")
+include(":dashboard")
