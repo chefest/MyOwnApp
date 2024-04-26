@@ -21,5 +21,9 @@ fun NavigationComponent(
             route = AppRoutes.DashboardRoute.route,
             navController = navController
         )
+        navigateToProfile(
+            route = AppRoutes.ProfileRoute.route,
+            navController = navController
+        )
     }
 }
