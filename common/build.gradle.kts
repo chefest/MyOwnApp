@@ -73,4 +73,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofitGson)
     implementation(libs.okhttp)
+
+    //COIL
+    implementation(libs.coil)
 }
