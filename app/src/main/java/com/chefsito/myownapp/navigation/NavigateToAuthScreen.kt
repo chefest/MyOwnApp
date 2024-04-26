@@ -28,7 +28,8 @@ fun NavGraphBuilder.navigateToAuthScreen(
             val authScreenState by authScreenViewModel.state.collectAsState()
             LaunchedEffect(key1 = authScreenState) {
                 if (ScreenStates.SUCCESS == authScreenState.screenStates) {
-                    navController.navigate(AppRoutes.DashboardRoute.route)
+                    //navController.navigate(AppRoutes.DashboardRoute.route)
+                    navController.navigate(AppRoutes.ProfileRoute.route)
                 }
             }
             AuthScreen(
