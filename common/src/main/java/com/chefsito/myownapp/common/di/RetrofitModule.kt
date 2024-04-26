@@ -1,4 +1,4 @@
-package com.chefsito.myownapp.auth.di
+package com.chefsito.myownapp.common.di
 
 import com.chefsito.myownapp.common.network.client.RetrofitClient
 import dagger.Module
