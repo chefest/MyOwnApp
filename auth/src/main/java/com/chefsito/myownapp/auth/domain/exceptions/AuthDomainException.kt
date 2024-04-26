@@ -10,7 +10,4 @@ sealed class AuthDomainException(override val message: String?): DomainException
     object FailAPIException: AuthDomainException("There was an error calling the auth api")
     object NoBodyException: AuthDomainException("The response from the server is empty")
     object UnknownException: AuthDomainException("Unkown exception")
-
-
-
 }
