@@ -1,11 +1,11 @@
 package com.chefsito.myownapp.auth.data.mappers
 
 import com.chefsito.myownapp.auth.data.models.AuthResponseModel
-import com.chefsito.myownapp.auth.domain.models.AuthDomainModel
+import com.chefsito.myownapp.auth.domain.models.AuthResponseDomainModel
 
 
-fun AuthResponseModel.toAuthDomainModel(): AuthDomainModel {
-    return AuthDomainModel(
+fun AuthResponseModel.toAuthDomainModel(): AuthResponseDomainModel {
+    return AuthResponseDomainModel(
         email = this.email,
         firstName = this.firstName,
         gender = this.gender,

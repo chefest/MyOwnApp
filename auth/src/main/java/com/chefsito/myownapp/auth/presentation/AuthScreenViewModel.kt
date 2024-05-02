@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chefsito.myownapp.auth.domain.exceptions.AuthDomainException
+import com.chefsito.myownapp.auth.domain.models.AuthRequestDomainModel
 import com.chefsito.myownapp.auth.domain.usecases.AuthUseCase
 import com.chefsito.myownapp.common.core.ScreenStates
 import com.chefsito.myownapp.common.core.token.TokenUseCase
@@ -54,8 +55,10 @@ class AuthScreenViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = authUseCase.exec(
-                    username = _state.value.username,
-                    password = _state.value.password
+                    AuthRequestDomainModel(
+                        username = _state.value.username,
+                        password = _state.value.password
+                    )
                 )
                 tokenUseCase.exec(result.token)
                 _state.update {

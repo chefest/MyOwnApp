@@ -1,6 +1,6 @@
 package com.chefsito.myownapp.auth.domain.models
 
-data class AuthDomainModel(
+data class AuthResponseDomainModel(
     val email: String,
     val firstName: String,
     val gender: String,
