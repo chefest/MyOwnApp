@@ -6,7 +6,8 @@ import com.chefsito.myownapp.auth.domain.exceptions.AuthDomainException
 import com.chefsito.myownapp.auth.domain.models.AuthResponseDomainModel
 import com.chefsito.myownapp.auth.domain.models.AuthRequestDomainModel
 import com.chefsito.myownapp.auth.domain.repository.AuthRepository
-import com.chefsito.myownapp.auth.domain.toAuthDomainException
+import com.chefsito.myownapp.auth.domain.mappers.toAuthDomainException
+import com.chefsito.myownapp.auth.domain.mappers.toAuthDomainModel
 import com.chefsito.myownapp.common.core.UseCase
 import javax.inject.Inject
 
@@ -38,7 +39,7 @@ class AuthUseCase @Inject constructor(
             return authRepository.postAuth(
                 username = username,
                 password = password
-            )
+            ).toAuthDomainModel()
         } catch (ex: AuthDataException) {
             throw ex.toAuthDomainException()
         } catch (ex: Exception) {

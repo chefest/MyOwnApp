@@ -1,4 +1,4 @@
-package com.chefsito.myownapp.auth.domain
+package com.chefsito.myownapp.auth.domain.mappers
 
 import com.chefsito.myownapp.auth.data.exceptions.AuthDataException
 import com.chefsito.myownapp.auth.domain.exceptions.AuthDomainException

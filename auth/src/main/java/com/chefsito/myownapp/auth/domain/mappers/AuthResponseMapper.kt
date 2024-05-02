@@ -1,4 +1,4 @@
-package com.chefsito.myownapp.auth.data.mappers
+package com.chefsito.myownapp.auth.domain.mappers
 
 import com.chefsito.myownapp.auth.data.models.AuthResponseModel
 import com.chefsito.myownapp.auth.domain.models.AuthResponseDomainModel
