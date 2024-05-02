@@ -3,8 +3,11 @@ package com.chefsito.myownapp.auth.domain.usecases
 import com.chefsito.myownapp.auth.data.exceptions.AuthDataException
 import com.chefsito.myownapp.auth.domain.utils.Constants
 import com.chefsito.myownapp.auth.domain.exceptions.AuthDomainException
-import com.chefsito.myownapp.auth.domain.models.AuthDomainModel
+import com.chefsito.myownapp.auth.domain.models.AuthResponseDomainModel
+import com.chefsito.myownapp.auth.domain.models.AuthRequestDomainModel
 import com.chefsito.myownapp.auth.domain.repository.AuthRepository
+import com.chefsito.myownapp.auth.domain.toAuthDomainException
+import com.chefsito.myownapp.common.core.UseCase
 import javax.inject.Inject
 
 /**
@@ -13,11 +16,12 @@ import javax.inject.Inject
  */
 class AuthUseCase @Inject constructor(
     private val authRepository: AuthRepository
-) {
-    suspend fun exec(
-        username: String,
-        password: String
-    ): AuthDomainModel {
+): UseCase<AuthRequestDomainModel, AuthResponseDomainModel> {
+    override suspend fun exec(
+        input: AuthRequestDomainModel
+    ): AuthResponseDomainModel {
+        val username = input.username
+        val password = input.password
         if (username.isEmpty() && password.isEmpty()) {
             throw AuthDomainException.EmptyLoginFormException
         }
@@ -31,23 +35,14 @@ class AuthUseCase @Inject constructor(
             throw AuthDomainException.LengthPasswordException
         }
         try {
-             return authRepository.postAuth(
+            return authRepository.postAuth(
                 username = username,
                 password = password
             )
+        } catch (ex: AuthDataException) {
+            throw ex.toAuthDomainException()
         } catch (ex: Exception) {
-            when(ex) {
-                AuthDataException.BodyEmptyException->{
-                    throw AuthDomainException.FailAPIException
-                }
-                AuthDataException.FailException->{
-                    throw AuthDomainException.NoBodyException
-                }
-                AuthDataException.UnknowException->{
-                    throw AuthDomainException.UnknownException
-                }
-            }
+            throw AuthDomainException.UnknownException
         }
-        throw AuthDomainException.UnknownException
     }
 }
