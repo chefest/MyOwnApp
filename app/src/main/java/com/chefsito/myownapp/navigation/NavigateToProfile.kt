@@ -1,5 +1,7 @@
 package com.chefsito.myownapp.navigation
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -11,7 +13,6 @@ import androidx.navigation.navigation
 import com.chefsito.myownapp.navigation.routes.AppRoutes
 import com.chefsito.myownapp.profile.presentation.ProfileScreen
 import com.chefsito.myownapp.profile.presentation.ProfileViewModel
-
 
 fun NavGraphBuilder.navigateToProfile(
     route: String,
@@ -25,9 +26,23 @@ fun NavGraphBuilder.navigateToProfile(
             val profileViewmodel: ProfileViewModel = hiltViewModel()
             profileViewmodel.getProfile()
             val stateModel by profileViewmodel.profileStateScreenModel.collectAsState()
+            val rememberLauncher = rememberLauncherForActivityResult(
+                contract =  ActivityResultContracts.GetContent()
+            ) { uri ->
+                try {
+                    uri?.let {
+                        profileViewmodel.onSelectImageEvent(uri)
+                    }
+                } catch (ex: Exception) {
+                    throw ex
+                }
+            }
             ProfileScreen(
                 modifier = Modifier,
-                profileScreenStateModel = stateModel
+                profileScreenStateModel = stateModel,
+                onClickSelectImage = {
+                    rememberLauncher.launch("image/*")
+                }
             )
         }
     }

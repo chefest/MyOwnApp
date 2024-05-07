@@ -18,12 +18,15 @@ import androidx.compose.ui.unit.dp
 import com.chefsito.myownapp.common.components.Label
 import com.chefsito.myownapp.profile.presentation.models.ProfileModelState
 import com.chefsito.myownapp.common.components.Piture
+import com.chefsito.myownapp.common.components.PitureFromUri
+import com.chefsito.myownapp.common.components.SubmitButton
 import com.chefsito.myownapp.profile.R
 
 @Composable
 fun ProfileScreen(
     modifier: Modifier,
-    profileScreenStateModel: ProfileModelState
+    profileScreenStateModel: ProfileModelState,
+    onClickSelectImage: ()-> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -47,6 +50,14 @@ fun ProfileScreen(
             label = stringResource(id = R.string.email),
             value = profileScreenStateModel.email
         )
+        SubmitButton(
+            value = "Seleccionar imagen",
+            onClickSubmit =  onClickSelectImage
+        )
+        PitureFromUri(
+            modifier = Modifier,
+            uri = profileScreenStateModel.uriImage
+        )
     }
 }
 
@@ -63,12 +74,16 @@ private fun Record(
             .border(BorderStroke(1.dp, SolidColor(Color.LightGray)))
     ) {
         Label(
-            modifier = Modifier.weight(.3f).padding(5.dp),
+            modifier = Modifier
+                .weight(.3f)
+                .padding(5.dp),
             value = label,
             color = Color.DarkGray
         )
         Label(
-            modifier = Modifier.weight(.7f).padding(5.dp),
+            modifier = Modifier
+                .weight(.7f)
+                .padding(5.dp),
             value = value,
             color = Color.Blue
         )

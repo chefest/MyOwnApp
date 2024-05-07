@@ -1,5 +1,6 @@
 package com.chefsito.myownapp.common.components
 
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -15,6 +16,20 @@ fun Piture(
 ) {
     AsyncImage(
         model = url,
+        contentDescription = contentDescription,
+        placeholder = painterResource(id = R.drawable.image_placeholder)
+    )
+}
+
+
+@Composable
+fun PitureFromUri(
+    modifier: Modifier,
+    uri: Uri? = null,
+    contentDescription: String = stringResource(id = R.string.content_description)
+) {
+    AsyncImage(
+        model = uri,
         contentDescription = contentDescription,
         placeholder = painterResource(id = R.drawable.image_placeholder)
     )
