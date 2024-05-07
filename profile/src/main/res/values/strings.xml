@@ -3,4 +3,6 @@
     <string name="name">Name</string>
     <string name="lastname">LastName</string>
     <string name="email">Email</string>
+    <string name="open_select">Open and Select the file</string>
+    <string name="image_media_type" translatable="false">"image/*"</string>
 </resources>

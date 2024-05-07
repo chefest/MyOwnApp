@@ -1,5 +1,6 @@
 package com.chefsito.myownapp.profile.presentation
 
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -16,17 +17,17 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.chefsito.myownapp.common.components.Label
+import com.chefsito.myownapp.common.components.MediaButtonUri
 import com.chefsito.myownapp.profile.presentation.models.ProfileModelState
 import com.chefsito.myownapp.common.components.Piture
 import com.chefsito.myownapp.common.components.PitureFromUri
-import com.chefsito.myownapp.common.components.SubmitButton
 import com.chefsito.myownapp.profile.R
 
 @Composable
 fun ProfileScreen(
     modifier: Modifier,
     profileScreenStateModel: ProfileModelState,
-    onClickSelectImage: ()-> Unit = {}
+    onUpdateUriImage: (Uri)-> Unit
 ) {
     Column(
         modifier = modifier
@@ -50,9 +51,10 @@ fun ProfileScreen(
             label = stringResource(id = R.string.email),
             value = profileScreenStateModel.email
         )
-        SubmitButton(
-            value = "Seleccionar imagen",
-            onClickSubmit =  onClickSelectImage
+        MediaButtonUri(
+            value = stringResource(id = R.string.open_select),
+            onUriResult = onUpdateUriImage,
+            mediaType = stringResource(id = R.string.image_media_type)
         )
         PitureFromUri(
             modifier = Modifier,

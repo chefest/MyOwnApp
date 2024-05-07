@@ -26,23 +26,10 @@ fun NavGraphBuilder.navigateToProfile(
             val profileViewmodel: ProfileViewModel = hiltViewModel()
             profileViewmodel.getProfile()
             val stateModel by profileViewmodel.profileStateScreenModel.collectAsState()
-            val rememberLauncher = rememberLauncherForActivityResult(
-                contract =  ActivityResultContracts.GetContent()
-            ) { uri ->
-                try {
-                    uri?.let {
-                        profileViewmodel.onSelectImageEvent(uri)
-                    }
-                } catch (ex: Exception) {
-                    throw ex
-                }
-            }
             ProfileScreen(
                 modifier = Modifier,
                 profileScreenStateModel = stateModel,
-                onClickSelectImage = {
-                    rememberLauncher.launch("image/*")
-                }
+                onUpdateUriImage = profileViewmodel::onSelectImageEvent
             )
         }
     }
